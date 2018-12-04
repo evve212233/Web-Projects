@@ -8,7 +8,7 @@ We made a simple to-do list application that utilizes Flask, PyMySQL, Ajax, and 
 
 >>frontend_ajax.html  -  front-end styling for to-do list
 
->CS1122_G14P1.pem   -  AWS keypair
+>G14P1.pem   -  AWS keypair
 
 >README.md          -  this
 
