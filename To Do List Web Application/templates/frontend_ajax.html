@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--ATTN: To test this code:-->
+<!--Put this file in a folder called 'templates'-->
+<!--FIRST, Kill any Python scripts that are already running, and then run backend_ajax.py right outside of the 'templates' folder-->
+<!--THEN, Navigate to 127.0.0.1:5000 or localhost:5000 in a modern web browser-->
+
+<html>
+
+	<head>
+		<!--The Cabin font was removed because it didn't always load correctly-->
+		<title>To-Do</title>
+		<meta charset='utf-8'>
+		<script src="https://code.jquery.com/jquery-3.3.1.js" 
+		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" 
+		crossorigin="anonymous"></script><!--This imports jQuery-->
+		<style>
+		
+			h1{
+				font-size:84px;
+				color:rgb(250,250,250);
+				text-align:center-left;
+				margin: 10px 10px 10px 10px;
+				padding: 0px 0px 0px 0px;
+			}
+			
+			body{
+				font-size: 16px;
+				background-color:#2c2f33;
+				max-width: 500px;
+				margin: auto;
+			}
+			
+			.button {
+				border: 3px solid #ffffff;
+				background: #2c2f33;
+				padding: 3px 6px;
+				-webkit-border-radius: 22px;
+				-moz-border-radius: 22px;
+				border-radius: 12px;
+				font-family:"Cabin";
+				color: #ffffff;
+				text-decoration: none;
+				vertical-align: middle;
+			}
+			
+			.button:hover {
+				border-top-color: #ffffff;
+				background: #ffffff;
+				color: #2c2f33;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<font color="#FFFFFF">
+		<h1>To-Do List</h1>
+		
+		<form method='post'><!--action='/'>-->
+			<input id='input' type='text' name='input' placeholder='max 150 characters, no "/" or "\"' size=35>
+			<span><button id='add' class='button' type='submit'>Add task</button> or press enter</span>
+		</form>
+		<ol id="list">
+			{% for item in toDoList %}
+				<form>
+					<li>
+						<span>{{item[0]}}</span>
+						<input name="newValue" id='/edit/{{item[1]}}' placeholder="enter a new value" type=hidden>
+						<button class="button edit" type="button">Edit task</button>
+						<button class="button remove" type="button" value='/delete/{{item[1]}}'>X</button>
+					</li>
+				</form>
+			{% endfor %}
+			<!--<li>{{toDoList}}</li><!--For debugging-->
+		</ol>
+		<!--jQuery and plain JS are mixed-->
+		<script>				
+			function addItem(){
+								$.ajax({url:'/',
+										type:'POST'});
+								//$('#input').val('');
+								};
+									
+			/*Add item after the 'Add item' button is clicked*/						
+			$('#add').on('click',function(){
+											//alert('pre-post');
+											addItem();
+											}
+						);											
+									
+			/* Add item to list on Enter keypress */
+			$('#input').on('keydown',function(event){
+												if(event.which==13){
+																	//alert('pre-post');
+																	addItem();
+																	}
+													}
+							);
+			
+			/* Remove item to list on X button click (passing the button-click event into removeItem() function) */			
+			$('#list').on('click','.remove',
+						function(){
+									//alert('You clicked on the delete button');
+									//alert($(this).val());
+									$.ajax({url:$(this).val(),
+											type:'DELETE'});
+									$(this).parent().parent().remove();
+									//$('#input').val('');
+									}
+							);
+			
+			/*creates an input field if the 'edit task' button is clicked on*/
+			$('#list').on('click','.edit',
+						function(){	
+									//$('<input name="newValue" placeholder="enter a new value">').insertBefore(this);
+									$(this).parent().children('input').attr('type','text');
+									$(this).toggle();
+									}	
+							);
+			/*Makes a PUT request when the user presses enter*/
+			$('#list').on('keydown','input',function(event){
+														if(event.which==13){
+																			var editURL=$(this).attr('id')+
+																			'/'+$(this).val();
+																			//alert(editURL);
+																			$.ajax({url:editURL,async:false,
+																					type:'PUT'});
+																			/*$.ajax({url:'/',
+																					type:'GET'});*/
+																			}
+															}
+							);		
+		</script>
+		</font>		
+	</body>
+</html>
