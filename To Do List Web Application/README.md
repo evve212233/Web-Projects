@@ -1,13 +1,4 @@
-# CS1122 Project 1 Group 14
-ks4765 - Kejian Shi
-
-zz1456 - Ziwei Zheng
-
-sx670 - Kevin Xu
-
-gs2913 - George Sotiropoulos
-
-jy2463 - Jesse You
+# Project 1 Group 14
 
 We made a simple to-do list application that utilizes Flask, PyMySQL, Ajax, and Amazon Web Services. (URL at bottom of page)
 
@@ -16,8 +7,6 @@ We made a simple to-do list application that utilizes Flask, PyMySQL, Ajax, and 
 >templates          -  contains HTML file for use with ajax
 
 >>frontend_ajax.html  -  front-end styling for to-do list
-        
->CREATE_SPRINT4.py  -  create a database for create and upload funtion, that can be merged into our main script
 
 >CS1122_G14P1.pem   -  AWS keypair
 
@@ -45,7 +34,3 @@ From there, navigate to http://127.0.0.1:5000/ or http://localhost:5000/ in a mo
 ## Sprint 3
 
 Before running the Flask script as shown in Sprint 2, run `mysql -u root -p` so there's an empty database for the to-do list to use, THEN run the script as detailed above.
-
-## Sprint 4
-
-http://ec2-18-222-78-35.us-east-2.compute.amazonaws.com/
