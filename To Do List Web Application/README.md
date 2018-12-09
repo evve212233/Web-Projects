@@ -21,7 +21,7 @@ We made a simple to-do list application that utilizes Flask, PyMySQL, Ajax, and 
 
 ## Sprint 1
 
-Any frontend HTML file is more or less a version of this week's assignment. Run the file in a modern web browser.
+A simple frontend HTML file. Run the file in a modern web browser.
 
 ## Sprint 2
 
